@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ton Avenir 🔮</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: "Raleway", sans-serif;
+    background: linear-gradient(135deg, #5563DE, #74ABE2);
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    color: #222;
+  }
+  header {
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 0.7rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  header a {
+    color: #ffec99;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    max-width: 460px;
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(8px);
+  }
+  h1 {
+    color: #5563DE;
+    font-weight: 800;
+  }
+  p {
+    font-size: 1rem;
+    color: #333;
+    margin: 0.5rem 0 1rem;
+  }
+  input, select, button {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: "Raleway", sans-serif;
+  }
+  input, select {
+    background: #f3f3f3;
+  }
+  button {
+    background: #5563DE;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #4450b2;
+  }
+  .result {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #6A11CB, #2575FC);
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: scale(0.9);
+    background-size: 200% 200%;
+    animation: fadeInScale 0.8s ease forwards, gradientMove 4s ease infinite alternate;
+  }
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+  footer {
+    padding: 0.7rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #555;
+    background: #f8f8f8;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  📱 WhatsApp : <a href="https://wa.me/22946282901" target="_blank">+229 46 28 29 01</a> &nbsp;|&nbsp;
+  💬 Voulez-vous créer un site web pour votre entreprise ou fait des publicités à votre entreprise <strong>Contactez-moi !</strong>
+</header>
+
+<main>
+  <div class="container">
+    <h1>Ton Avenir 🔮</h1>
+    <p>Entre ton signe, ton genre et ton prénom pour découvrir ton âme sœur !</p>
+    <input id="prenom" placeholder="Ton prénom" />
+    <select id="signe">
+      <option value="" disabled selected>Signe astrologique</option>
+      <option>Bélier ♈️</option><option>Taureau ♉️</option><option>Gémeaux ♊️</option><option>Cancer ♋️</option><option>Lion ♌️</option><option>Vierge ♍️</option><option>Balance ♎️</option><option>Scorpion ♏️</option><option>Sagittaire ♐️</option><option>Capricorne ♑️</option><option>Verseau ♒️</option><option>Poissons ♓️</option>
+    </select>
+    <select id="genre">
+      <option value="homme">Je suis un homme</option>
+      <option value="femme">Je suis une femme</option>
+    </select>
+    <button onclick="genererResultat()">Découvrir mon futur</button>
+    <div class="result" id="resultat" style="display:none;"></div>
+    <button id="recommencer" style="margin-top:1rem; display:none;" onclick="recommencer()">Recommencer</button>
+  </div>
+</main>
+
+<footer>© 2025 — Landry Kendrick</footer>
+
+<script>
+const nationalites = [
+  "Algérien(ne) 🇩🇿","Angolais(e) 🇦🇴","Béninois(e) 🇧🇯","Burkinabè 🇧🇫","Burundais(e) 🇧🇮","Camerounais(e) 🇨🇲","Centrafricain(e) 🇨🇫","Congolais(e) 🇨🇬","Djiboutien(ne) 🇩🇯","Égyptien(ne) 🇪🇬","Éthiopien(ne) 🇪🇹","Gabonais(e) 🇬🇦","Gambien(ne) 🇬🇲","Ghanéen(ne) 🇬🇭","Guinéen(ne) 🇬🇳","Ivoirien(ne) 🇨🇮","Kényan(e) 🇰🇪","Malien(ne) 🇲🇱","Mozambicain(e) 🇲🇿","Namibien(ne) 🇳🇦","Nigérian(e) 🇳🇬","Ougandais(e) 🇺🇬","Rwandais(e) 🇷🇼","Sénégalais(e) 🇸🇳","Sud-Africain(e) 🇿🇦","Tanzanien(ne) 🇹🇿","Togolais(e) 🇹🇬","Zambien(ne) 🇿🇲","Zimbabwéen(ne) 🇿🇼","Soudanais(e) 🇸🇩",
+  "Allemand(e) 🇩🇪","Andorran(e) 🇦🇩","Autrichien(ne) 🇦🇹","Belg(e) 🇧🇪","Croate 🇭🇷","Danois(e) 🇩🇰","Espagnol(e) 🇪🇸","Estonien(ne) 🇪🇪","Finlandais(e) 🇫🇮","Français(e) 🇫🇷","Grec(que) 🇬🇷","Hongrois(e) 🇭🇺","Irlandais(e) 🇮🇪","Islandais(e) 🇮🇸","Italien(ne) 🇮🇹","Letton(ne) 🇱🇻","Lituanien(ne) 🇱🇹","Luxembourgeois(e) 🇱🇺","Maltais(e) 🇲🇹","Moldave 🇲🇩","Monégasque 🇲🇨","Néerlandais(e) 🇳🇱","Norvégien(ne) 🇳🇴","Polonais(e) 🇵🇱","Portugais(e) 🇵🇹","Roumain(e) 🇷🇴","Russe 🇷🇺","Suédois(e) 🇸🇪","Suisse 🇨🇭","Tchèque 🇨🇿",
+  "Américain(e) 🇺🇸","Argentin(e) 🇦🇷","Bahamasien(ne) 🇧🇸","Barbadien(ne) 🇧🇧","Bélizien(ne) 🇧🇿","Bolivien(ne) 🇧🇴","Brésilien(ne) 🇧🇷","Canadien(ne) 🇨🇦","Chilien(ne) 🇨🇱","Colombien(ne) 🇨🇴","Costaricien(ne) 🇨🇷","Cubain(e) 🇨🇺","Dominicain(e) 🇩🇴","Équatorien(ne) 🇪🇨","Guatémaltèque 🇬🇹","Guyanais(e) 🇬🇾","Haïtien(ne) 🇭🇹","Hondurien(ne) 🇭🇳","Jamaïcain(e) 🇯🇲","Mexicain(e) 🇲🇽","Nicaraguayen(ne) 🇳🇮","Panaméen(ne) 🇵🇦","Paraguayen(ne) 🇵🇾","Péruvien(ne) 🇵🇪","Portoricain(e) 🇵🇷","Salvadorien(ne) 🇸🇻","Surinamais(e) 🇸🇷","Trinidadien(ne) 🇹🇹","Uruguayen(ne) 🇺🇾","Vénézuélien(ne) 🇻🇪",
+  "Afghan(e) 🇦🇫","Arménien(ne) 🇦🇲","Azerbaïdjanais(e) 🇦🇿","Bangladais(e) 🇧🇩","Birman(e) 🇲🇲","Cambodgien(ne) 🇰🇭","Chinois(e) 🇨🇳","Émirien(ne) 🇦🇪","Géorgien(ne) 🇬🇪","Indien(ne) 🇮🇳","Indonésien(ne) 🇮🇩","Irakien(ne) 🇮🇶","Iranien(ne) 🇮🇷","Israélien(ne) 🇮🇱","Japonais(e) 🇯🇵","Jordanien(ne) 🇯🇴","Kazakh(e) 🇰🇿","Koweïtien(ne) 🇰🇼","Laotien(ne) 🇱🇦","Libanais(e) 🇱🇧","Malaisien(ne) 🇲🇾","Mongol(e) 🇲🇳","Népalais(e) 🇳🇵","Ouzbek(ke) 🇺🇿","Pakistanais(e) 🇵🇰","Qatarien(ne) 🇶🇦","Saoudien(ne) 🇸🇦","Singapourien(ne) 🇸🇬","Syrien(ne) 🇸🇾","Thaïlandais(e) 🇹🇭"
+];
+
+const villesRencontre = [
+  "Bénin 🇧🇯","Côte d'Ivoire 🇨🇮","Sénégal 🇸🇳","Nigeria 🇳🇬","Kenya 🇰🇪","Ghana 🇬🇭","Togo 🇹🇬","Cameroun 🇨🇲","Afrique du Sud 🇿🇦","Maroc 🇲🇦","Égypte 🇪🇬","Algérie 🇩🇿","Tanzanie 🇹🇿","Ouganda 🇺🇬","Rwanda 🇷🇼","France 🇫🇷","Italie 🇮🇹","Espagne 🇪🇸","Allemagne 🇩🇪","Royaume-Uni 🇬🇧","Portugal 🇵🇹","Suisse 🇨🇭","Belgique 🇧🇪","Pays-Bas 🇳🇱","Suède 🇸🇪","États-Unis 🇺🇸","Canada 🇨🇦","Brésil 🇧🇷","Argentine 🇦🇷","Mexique 🇲🇽","Japon 🇯🇵","Chine 🇨🇳","Corée du Sud 🇰🇷","Inde 🇮🇳","Australie 🇦🇺","Panama 🇵🇦","Pérou 🇵🇪","Venezuela 🇻🇪","Colombie 🇨🇴","Chili 🇨🇱"
+];
+
+const metiers = [
+  // Afrique
+  "Agriculteur(trice)","Guérisseur(euse)","Pêcheur(euse)","Artisan(e)","Orpailleur(euse)","Guide touristique","Couturier(ère)","Vendeur(euse) de marché","Chauffeur(euse) de taxi-moto","Enseignant(e)","Éleveur(euse)","Fabricant(e) d’instruments","Forgeron(ne)","Potièr(e)","Transformateur(trice)","Chasseur(euse)","Producteur(trice) de karité","Gestionnaire de coopérative","Commerçant(e)","Apiculteur(trice)","Voleur(euse)","Escroc(que)","Braconnier(e)","Contrebandier(e)","Faussaire",
+  // Amériques
+  "Programmeur(se)","Acteur(trice)","Avocat(e)","Chirurgien(ne)","Athlète professionnel(le)","Designer(euse)","Marketeur(se)","Journaliste","Producteur(trice) musical(e)","Chef cuisinier(e)","Banquier(ère)","Psychologue","Pilote d'avion","Entrepreneur(se)","Agent(e) immobilier(e)","Professeur(e)","Directeur(trice) de startup","Analyste financier(ère)","Écrivain(e)","Photographe","Cambrioleur(euse)","Dealer","Pickpocket","Pirate informatique","Faussaire",
+  // Europe
+  "Médecin(ne)","Chercheur(se)","Ingénieur(e)","Architecte","Professeur(e)","Traducteur(trice)","Historien(ne)","Avocat(e)","Enseignant(e) d’arts","Vétérinaire","Designer(euse) d’intérieur","Banquier(ère)","Cadre commercial(e)","Sommelier","Politicien(ne)","Chef(fe) de projet IT","Psychologue","Musicien(ne)","Biologiste","Pharmacien(ne)","Escroc(que)","Voleur(euse)","Hacker","Dealer","Faussaire",
+  // Asie
+  "Ingénieur(e) informatique","Maître d’arts martiaux","Cuisinier(e) de street food","Instructeur(trice) de yoga","Calligraphe","Producteur(trice) de thé","Commerçant(e)","Sculpteur(trice)","Traducteur(trice)","Designer(euse) textile","Entrepreneur(se) technologique","Responsable logistique","Analyste en données","Guide spirituel(le)","Responsable d’usine","Styliste","Électricien(ne)","Coach fitness","Chercheur(se) en biotechnologie","Chef(fe) pâtissier(ère)","Voleur(euse)","Escroc(que)","Pirate informatique","Traficant(e)","Faussaire"
+];
+
+const signes = ["Bélier ♈️","Taureau ♉️","Gémeaux ♊️","Cancer ♋️","Lion ♌️","Vierge ♍️","Balance ♎️","Scorpion ♏️","Sagittaire ♐️","Capricorne ♑️","Verseau ♒️","Poissons ♓️"];
+
+function genererResultat() {
+  const prenom = document.getElementById('prenom').value.trim();
+  const signeUser = document.getElementById('signe').value;
+  const genre = document.getElementById('genre').value;
+
+  if (!prenom || !signeUser) {
+    alert('Entre ton prénom et ton signe astrologique avant de continuer !');
+    return;
+  }
+
+  const metier = metiers[Math.floor(Math.random() * metiers.length)];
+  const signe = signes[Math.floor(Math.random() * signes.length)];
+  const nationalite = nationalites[Math.floor(Math.random() * nationalites.length)];
+  const ville = villesRencontre[Math.floor(Math.random() * villesRencontre.length)];
+  const pronomAmeSoeur = genre === "homme" ? "ta future femme" : "ton futur mari";
+
+  const message = `${prenom} (${signeUser}), ${pronomAmeSoeur} sera ${nationalite}, son métier sera ${metier}, son signe astrologique sera ${signe}, et vous vous rencontrerez à ${ville}.`;
+  document.getElementById('resultat').innerHTML = message;
+  document.getElementById('resultat').style.display = "block";
+  document.getElementById('recommencer').style.display = "block";
+}
+
+function recommencer() {
+  document.getElementById('prenom').value = '';
+  document.getElementById('signe').selectedIndex = 0;
+  document.getElementById('genre').selectedIndex = 0;
+  document.getElementById('resultat').style.display = "none";
+  document.getElementById('recommencer').style.display = "none";
+}
+</script>
+
+</body>
+</html>
